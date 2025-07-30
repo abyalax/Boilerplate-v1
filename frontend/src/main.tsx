@@ -10,6 +10,8 @@ import '@mantine/core/styles.layer.css';
 
 import '@mantine/core/styles/baseline.css';
 import '@mantine/core/styles/global.css';
+import '@mantine/notifications/styles.layer.css';
+import '@mantine/notifications/styles.css';
 import '@mantine/core/styles/Notification.css';
 
 import '~/lib/axios/api';
