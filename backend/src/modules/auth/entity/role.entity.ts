@@ -1,7 +1,6 @@
-//* It Does Not Support Path Alias Shorthand */
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
-import { User } from '../../user/user.entity';
 import { Permission } from './permission.entity';
+import { User } from '~/modules/user/user.entity';
 
 @Entity('roles')
 export class Role {

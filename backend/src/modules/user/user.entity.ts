@@ -1,5 +1,4 @@
-//* It Does Not Support Path Alias Shorthand */
-import { Column, CreateDateColumn, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Role } from '../auth/entity/role.entity';
 
 @Entity({ name: 'users' })

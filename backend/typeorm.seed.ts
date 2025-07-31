@@ -1,11 +1,10 @@
-//* It Does Not Support Path Alias Shorthand */
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SeederOptions } from 'typeorm-extension';
-import { Product } from './src/modules/product/entity/product.entity';
-import { User } from './src/modules/user/user.entity';
-import { Role } from './src/modules/auth/entity/role.entity';
-import { Permission } from './src/modules/auth/entity/permission.entity';
-import { Category } from './src/modules/product/entity/category.entity';
+import { Product } from '~/modules/product/entity/product.entity';
+import { User } from '~/modules/user/user.entity';
+import { Role } from '~/modules/auth/entity/role.entity';
+import { Permission } from '~/modules/auth/entity/permission.entity';
+import { Category } from '~/modules/product/entity/category.entity';
 
 const dataSourceOptions: DataSourceOptions & SeederOptions = {
   type: 'mysql',

@@ -9,5 +9,11 @@
     "node_modules": true,
     ".husky": true,
     "backend/coverage": true
-  }
+  },
+  "eslint.rules.customizations": [
+    {
+      "rule": "prettier/prettier",
+      "severity": "off"
+    }
+  ]
 }

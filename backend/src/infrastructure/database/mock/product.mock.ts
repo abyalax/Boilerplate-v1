@@ -1,6 +1,5 @@
-//* It Does Not Support Path Alias Shorthand */
-import { Product } from '../../../modules/product/entity/product.entity';
-import { EProductStatus } from '../../../modules/product/product.interface';
+import { Product } from '~/modules/product/entity/product.entity';
+import { EProductStatus } from '~/modules/product/product.interface';
 
 const now = new Date();
 export const mockCategories = [

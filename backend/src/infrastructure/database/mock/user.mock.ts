@@ -1,7 +1,5 @@
-//* It Does Not Support Path Alias Shorthand */
-import { User } from '../../../modules/user/user.entity';
-
-const bcrypt = require('bcryptjs');
+import * as bcrypt from 'bcryptjs';
+import { User } from '~/modules/user/user.entity';
 
 export const mockUser = async (): Promise<User[]> => {
   const plaintextPassword = 'password';

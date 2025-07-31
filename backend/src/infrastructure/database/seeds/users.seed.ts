@@ -1,14 +1,15 @@
-//* It Does Not Support Path Alias Shorthand */
 import type { Seeder } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
-import { User } from '../../../modules/user/user.entity';
-import { mockUser } from '../mock/user.mock';
-import { Role } from '../../../modules/auth/entity/role.entity';
-import { Permission } from '../../../modules/auth/entity/permission.entity';
-import { mockRoles } from '../mock/role.mock';
+
+import { Permission } from '~/modules/auth/entity/permission.entity';
+import { Role } from '~/modules/auth/entity/role.entity';
+import { User } from '~/modules/user/user.entity';
+
 import { mockPermissions } from '../mock/permission.mock';
 import { mockRolePermissions } from '../mock/role-permission.mock';
+import { mockRoles } from '../mock/role.mock';
 import { mockUserRoles } from '../mock/user-role.mock';
+import { mockUser } from '../mock/user.mock';
 
 export default class UserSeeder implements Seeder {
   public async run(dataSource: DataSource): Promise<void> {
