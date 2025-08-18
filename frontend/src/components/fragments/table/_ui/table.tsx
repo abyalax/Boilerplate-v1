@@ -20,9 +20,6 @@ import type { MetaResponse } from '~/common/types/meta';
 import type { TAxiosResponse } from '~/common/types/response';
 import type { FileRouteTypes } from '~/routeTree.gen';
 import type { EngineSide } from '../_hooks/use-table-state';
-
-import '@mantine/core/styles/Pagination.css';
-import '@mantine/core/styles/Table.css';
 import { getColors } from '~/components/themes';
 
 export type TableProps<T> = {

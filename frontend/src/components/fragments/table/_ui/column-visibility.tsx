@@ -15,12 +15,12 @@ export const ColumnVisibilitySelector = <T,>({ table, columnIds }: ColumnSelecto
     .map(([key]) => key);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>, id: string | undefined) => {
-    const selectedOptions = e.target.checked ? [...columnVisibilityCheckboxState, id] : columnVisibilityCheckboxState.filter(key => key !== id);
+    const selectedOptions = e.target.checked ? [...columnVisibilityCheckboxState, id] : columnVisibilityCheckboxState.filter((key) => key !== id);
     table.setColumnVisibility(
       columnIds.reduce((acc: { [id: string]: boolean }, val) => {
         acc[val ?? ''] = selectedOptions.includes(val);
         return acc;
-      }, {})
+      }, {}),
     );
   };
 
@@ -40,7 +40,7 @@ export const ColumnVisibilitySelector = <T,>({ table, columnIds }: ColumnSelecto
                 value={id}
                 label={convertCamelToTitleCase(id ?? '')}
                 checked={columnVisibilityCheckboxState.includes(id ?? '')}
-                onChange={e => handleOnChange(e, id)}
+                onChange={(e) => handleOnChange(e, id)}
               />
             </Menu.Item>
           ))}

@@ -91,7 +91,7 @@ export const useColumn = ({ defaultVisible }: Params) => {
         },
       }),
     ],
-    [mutateDeleteProduct]
+    [mutateDeleteProduct],
   );
 
   const columnIds = useMemo(() => columns.map((col) => col.id), [columns]);
@@ -102,7 +102,7 @@ export const useColumn = ({ defaultVisible }: Params) => {
         acc[val as TProductColumn] = defaultVisible.includes(val as TProductColumn);
         return acc;
       },
-      {} as Record<TProductColumn, boolean>
+      {} as Record<TProductColumn, boolean>,
     );
   }, [columnIds, defaultVisible]);
 

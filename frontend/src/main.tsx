@@ -1,18 +1,20 @@
+import { MantineProvider, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { Notifications } from '@mantine/notifications';
 import ReactDOM from 'react-dom/client';
 import { StrictMode } from 'react';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { MantineProvider, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 
 import '@mantine/core/styles.layer.css';
+import '@mantine/core/styles.css';
+
+import '@mantine/notifications/styles.layer.css';
+import '@mantine/core/styles/Notification.css';
+import '@mantine/notifications/styles.css';
 
 import '@mantine/core/styles/baseline.css';
 import '@mantine/core/styles/global.css';
-import '@mantine/notifications/styles.layer.css';
-import '@mantine/notifications/styles.css';
-import '@mantine/core/styles/Notification.css';
 
 import '~/lib/axios/api';
 import './index.css';
@@ -70,6 +72,6 @@ if (!rootElement.innerHTML) {
         </MantineProvider>
         <ReactQueryDevtools position="bottom" />
       </QueryClientProvider>
-    </StrictMode>
+    </StrictMode>,
   );
 }

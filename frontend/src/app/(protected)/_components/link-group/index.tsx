@@ -15,15 +15,15 @@ interface LinksGroupProps {
 export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksGroupProps) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
-  const items = (hasLinks ? links : []).map(link => (
-    <Text component={Link} to={link.link} className={classes.link} href={link.link} key={link.label} onClick={event => event.preventDefault()}>
+  const items = (hasLinks ? links : []).map((link) => (
+    <Text component={Link} to={link.link} className={classes.link} href={link.link} key={link.label} onClick={(event) => event.preventDefault()}>
       {link.label}
     </Text>
   ));
 
   return (
     <>
-      <UnstyledButton onClick={() => setOpened(o => !o)} className={classes.control}>
+      <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
         <Group justify="space-between" gap={0}>
           <Box style={{ display: 'flex', alignItems: 'center' }}>
             <ThemeIcon variant="light" size={30}>

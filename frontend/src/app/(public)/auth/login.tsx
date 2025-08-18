@@ -3,9 +3,9 @@ import { Form, useForm } from '@mantine/form';
 import { zodResolver } from 'mantine-form-zod-resolver';
 import { Button, TextInput, Text } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
-import z from 'zod';
 import { usePostLogin } from './_hooks/use-post-login';
 import { useSessionStore } from '~/stores/use-session';
+import z from 'zod';
 
 export const Route = createFileRoute('/(public)/auth/login')({
   component: RouteComponent,
@@ -13,7 +13,7 @@ export const Route = createFileRoute('/(public)/auth/login')({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const email = useSessionStore(s => s.session?.user?.email);
+  const email = useSessionStore((s) => s.session?.user?.email);
   const { mutate: mutateLogin } = usePostLogin();
 
   const schema = z.object({
@@ -32,7 +32,7 @@ function RouteComponent() {
   });
 
   const handleSubmit = () =>
-    form.onSubmit(values => {
+    form.onSubmit((values) => {
       mutateLogin(values);
       notifications.show({
         title: 'Success',
