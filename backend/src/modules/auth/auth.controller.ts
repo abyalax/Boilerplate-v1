@@ -8,6 +8,8 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { AuthService } from './auth.service';
 
 import { TResponse } from '~/common/types/response';
+import { JwtGuard } from '~/common/guards/jwt.guard';
+import { RolesGuard } from '~/common/guards/roles.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -58,11 +60,12 @@ export class AuthController {
     });
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, JwtGuard, RolesGuard)
   @Get('permissions')
   async getFullPermissions(@Request() req: RequestExpress): Promise<TResponse<PermissionsDto[] | undefined>> {
+    console.log(req.user);
     const id = req.user?.id;
-    if (!id) throw new UnauthorizedException();
+    if (!id) throw new UnauthorizedException('ID User not found');
     const permission = await this.authService.getFullPermissions(id);
     return {
       statusCode: HttpStatus.OK,

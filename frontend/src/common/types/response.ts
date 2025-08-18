@@ -7,6 +7,7 @@ export enum EMessage {
   TOKEN_MALFORMED = 'Token Malformed',
   TOKEN_SIGNATURE_INVALID = 'Token Signature Invalid',
   TOKEN_NOT_BEFORE = 'Token Not Before',
+  REFRESH_TOKEN_EXPIRED = 'Refresh Token Expired',
 
   DATABASE_ERROR = 'Database Error',
   DATABASE_QUERY_FAILED = 'Database Query Failed',
@@ -17,7 +18,7 @@ export enum EMessage {
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
 }
 
-export type TResponse<T> = {
+export type TResponse<T = unknown> = {
   statusCode: number;
   message?: string;
   error?: string;

@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Role } from '../auth/entity/role.entity';
+import type { Role } from '../auth/entity/role.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -15,7 +15,7 @@ export class User {
   @Column({ type: 'varchar', length: 100, nullable: false })
   password: string;
 
-  @ManyToMany(() => Role, (role) => role.users)
+  @ManyToMany('Role', 'users')
   @JoinTable({
     name: 'user_roles',
     joinColumn: { name: 'id_user', referencedColumnName: 'id' },

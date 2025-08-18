@@ -5,6 +5,9 @@ import { Permission } from '~/modules/auth/entity/permission.entity';
 import { Category } from '~/modules/product/entity/category.entity';
 import { Role } from '~/modules/auth/entity/role.entity';
 import { User } from '~/modules/user/user.entity';
+import { configDotenv } from 'dotenv';
+
+configDotenv();
 
 type TDatabaseCollection = 'MYSQL';
 
@@ -28,11 +31,11 @@ export const DATABASE: TDatabaseOptions = {
     PROVIDE: 'mysql_connection',
     OPTIONS: {
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'db_boilerplate_v1',
+      host: process.env.DATABASE_HOST,
+      port: parseInt(process.env.DATABASE_PORT!),
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       dateStrings: false,
       entities: [Category, Product, User, Role, Permission],
       synchronize: false,

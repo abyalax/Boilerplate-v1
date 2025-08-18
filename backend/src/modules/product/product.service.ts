@@ -11,6 +11,7 @@ import { MetaResponse } from '~/common/types/meta';
 import { CategoryDto, CreateCategoryDto } from './dto/category-product.dto';
 import { Category } from './entity/category.entity';
 import { mapProductRows, RowProducts } from '~/modules/product/product.map';
+import { rangeFilter } from '~/common/helper/query';
 
 @Injectable()
 export class ProductService {
@@ -39,20 +40,7 @@ export class ProductService {
       params.push(query.status);
     }
 
-    if (query?.min_price && !query?.max_price) {
-      whereClauses.push(`product.price >= ?`);
-      params.push(query.min_price);
-    }
-
-    if (!query?.min_price && query?.max_price) {
-      whereClauses.push(`product.price <= ?`);
-      params.push(query.max_price);
-    }
-
-    if (query?.min_price && query?.max_price && query.max_price > query.min_price) {
-      whereClauses.push(`product.price BETWEEN ? AND ?`);
-      params.push(query.min_price, query.max_price);
-    }
+    rangeFilter('product.price', query?.min_price, query?.max_price, whereClauses, params);
 
     if (query?.category) {
       whereClauses.push(`category.id = ?`);

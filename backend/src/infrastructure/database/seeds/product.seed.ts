@@ -5,16 +5,15 @@ import { Category } from '~/modules/product/entity/category.entity';
 import { Product } from '~/modules/product/entity/product.entity';
 
 export default class ProductSeeder implements Seeder {
+  track = true;
   public async run(dataSource: DataSource): Promise<void> {
-    await dataSource.query('DELETE FROM products');
-    await dataSource.query('DELETE FROM categories');
-
     const repositoryCategory = dataSource.getRepository(Category);
-    await repositoryCategory.insert(mockCategories);
-    console.log('✅ Category Seeded Successfully');
+    const repositoryProducts = dataSource.getRepository(Product);
 
-    const repository = dataSource.getRepository(Product);
-    await repository.save(mockProducts);
-    console.log('✅ Product Seeded Successfully');
+    await repositoryCategory.insert(mockCategories);
+    console.log('✅ Seeded: categories successfully');
+
+    await repositoryProducts.save(mockProducts);
+    console.log('✅ Seeded: products successfully');
   }
 }

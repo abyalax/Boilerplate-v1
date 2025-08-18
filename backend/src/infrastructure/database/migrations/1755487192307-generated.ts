@@ -1,20 +1,20 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class Generated1752993423492 implements MigrationInterface {
-  name = 'Generated1752993423492';
+export class Generated1755487192307 implements MigrationInterface {
+  name = 'Generated1755487192307';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `CREATE TABLE \`categories\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(100) NOT NULL, \`created_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updated_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), FULLTEXT INDEX \`IDX_8b0be371d28245da6e4f4b6187\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
-    );
-    await queryRunner.query(
-      `CREATE TABLE \`products\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(100) NOT NULL, \`price\` decimal(10,2) NOT NULL, \`status\` enum ('AVAILABLE', 'UNAVAILABLE') NOT NULL, \`stock\` int NOT NULL DEFAULT '0', \`created_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updated_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`category_id\` int NULL, FULLTEXT INDEX \`IDX_4c9fb58de893725258746385e1\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
-    );
     await queryRunner.query(
       `CREATE TABLE \`permissions\` (\`id\` int NOT NULL AUTO_INCREMENT, \`key_name\` varchar(80) NOT NULL, \`name_permission\` varchar(80) NOT NULL, UNIQUE INDEX \`IDX_4be56d0cb4f14292b2b5942d3b\` (\`key_name\`), UNIQUE INDEX \`IDX_e77c25aaad297ba331155532fa\` (\`name_permission\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
     await queryRunner.query(
       `CREATE TABLE \`roles\` (\`id_role\` int NOT NULL AUTO_INCREMENT, \`name_role\` varchar(50) NOT NULL, PRIMARY KEY (\`id_role\`)) ENGINE=InnoDB`,
+    );
+    await queryRunner.query(
+      `CREATE TABLE \`categories\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(100) NOT NULL, \`created_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updated_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), FULLTEXT INDEX \`IDX_8b0be371d28245da6e4f4b6187\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
+    );
+    await queryRunner.query(
+      `CREATE TABLE \`products\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(100) NOT NULL, \`price\` decimal(10,2) NOT NULL, \`status\` enum ('AVAILABLE', 'UNAVAILABLE') NOT NULL, \`stock\` int NOT NULL DEFAULT '0', \`category_id\` int NULL, \`created_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updated_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), FULLTEXT INDEX \`IDX_4c9fb58de893725258746385e1\` (\`name\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
     await queryRunner.query(
       `CREATE TABLE \`users\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(100) NOT NULL, \`email\` varchar(100) NOT NULL, \`password\` varchar(100) NOT NULL, \`refresh_token\` text NULL, \`created_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updated_at\` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
@@ -55,13 +55,13 @@ export class Generated1752993423492 implements MigrationInterface {
     await queryRunner.query(`DROP INDEX \`IDX_c0f5917f07a9e2bfd31ac5fb15\` ON \`role_permissions\``);
     await queryRunner.query(`DROP TABLE \`role_permissions\``);
     await queryRunner.query(`DROP TABLE \`users\``);
-    await queryRunner.query(`DROP TABLE \`roles\``);
-    await queryRunner.query(`DROP INDEX \`IDX_e77c25aaad297ba331155532fa\` ON \`permissions\``);
-    await queryRunner.query(`DROP INDEX \`IDX_4be56d0cb4f14292b2b5942d3b\` ON \`permissions\``);
-    await queryRunner.query(`DROP TABLE \`permissions\``);
     await queryRunner.query(`DROP INDEX \`IDX_4c9fb58de893725258746385e1\` ON \`products\``);
     await queryRunner.query(`DROP TABLE \`products\``);
     await queryRunner.query(`DROP INDEX \`IDX_8b0be371d28245da6e4f4b6187\` ON \`categories\``);
     await queryRunner.query(`DROP TABLE \`categories\``);
+    await queryRunner.query(`DROP TABLE \`roles\``);
+    await queryRunner.query(`DROP INDEX \`IDX_e77c25aaad297ba331155532fa\` ON \`permissions\``);
+    await queryRunner.query(`DROP INDEX \`IDX_4be56d0cb4f14292b2b5942d3b\` ON \`permissions\``);
+    await queryRunner.query(`DROP TABLE \`permissions\``);
   }
 }

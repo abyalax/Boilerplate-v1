@@ -1,3 +1,5 @@
+import type { ExtractString } from '~/utils';
+
 export const QUERY_KEY = {
   PRODUCT: {
     GET_ALL: 'get-product-all',
@@ -6,5 +8,4 @@ export const QUERY_KEY = {
   },
 } as const;
 
-type ObjectKey = typeof QUERY_KEY;
-export type QueryKey = ObjectKey[keyof ObjectKey][keyof ObjectKey[keyof ObjectKey]];
+export type QueryKey = ExtractString<typeof QUERY_KEY>;

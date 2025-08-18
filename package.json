@@ -12,6 +12,9 @@
     "prettier": "^3.6.2"
   },
   "scripts": {
+    "dev": "concurrently --kill-others pnpm:dev:backend pnpm:dev:frontend",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
     "prepare": "husky"
   },
   "lint-staged": {

@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { EProductStatus } from '../product.interface';
-import { Category } from './category.entity';
+import type { Category } from './category.entity';
 
 @Entity({ name: 'products' })
 @Index(['name'], { fulltext: true })
@@ -23,7 +23,7 @@ export class Product {
   @Column({ nullable: true })
   category_id: number;
 
-  @ManyToOne(() => Category, (category) => category.products, { onDelete: 'RESTRICT', onUpdate: 'CASCADE', eager: true })
+  @ManyToOne('Category', 'products', { onDelete: 'RESTRICT', onUpdate: 'CASCADE', eager: true })
   @JoinColumn({ name: 'category_id' })
   category: Category;
 

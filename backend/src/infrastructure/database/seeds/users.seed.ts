@@ -12,6 +12,7 @@ import { mockUserRoles } from '../mock/user-role.mock';
 import { mockUser } from '../mock/user.mock';
 
 export default class UserSeeder implements Seeder {
+  track = true;
   public async run(dataSource: DataSource): Promise<void> {
     const userRepo = dataSource.getRepository(User);
     const roleRepo = dataSource.getRepository(Role);
@@ -20,25 +21,23 @@ export default class UserSeeder implements Seeder {
     const dataUser = await mockUser();
 
     await userRepo.insert(dataUser);
-    console.log('✅ User Seeded Successfully');
+    console.log('✅ Seeded: users successfully');
 
     await roleRepo.insert(mockRoles);
-    console.log('✅ Role Seeded Successfully');
+    console.log('✅ Seeded: roles successfully');
 
     await permRepo.insert(mockPermissions);
-    console.log('✅ Permission Seeded Successfully');
+    console.log('✅ Seeded: permissions successfully');
 
     for (const { id_role, id_permission } of mockRolePermissions) {
       await dataSource.query('INSERT INTO role_permissions (id_role, id_permission) VALUES (?, ?)', [id_role, id_permission]);
     }
 
-    console.log('✅ Seeded: role_permissions');
+    console.log('✅ Seeded: role_permissions successfully');
 
     for (const { id_user, id_role } of mockUserRoles) {
       await dataSource.query('INSERT INTO user_roles (id_user, id_role) VALUES (?, ?)', [id_user, id_role]);
     }
-    console.log('✅ Seeded: user_roles');
-
-    console.log('✅ Seeded: users, roles, permissions, user_roles, role_permissions');
+    console.log('✅ Seeded: user_roles successfully');
   }
 }

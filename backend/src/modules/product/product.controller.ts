@@ -12,11 +12,11 @@ import { MetaResponse } from '~/common/types/meta';
 import { CategoryDto, CreateCategoryDto } from './dto/category-product.dto';
 
 @UseGuards(AuthGuard, JwtGuard, RolesGuard)
-@Roles('Admin')
 @Controller('products')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
+  @Roles('Admin', 'Cashier')
   @Get()
   async get(@Query() query: QueryProductDto): Promise<TResponse<{ data: ProductDto[]; meta: MetaResponse }>> {
     console.log(query);
@@ -27,6 +27,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Get('categories')
   async getCategories(): Promise<TResponse<CategoryDto[]>> {
     const data = await this.productService.getCategories();
@@ -36,6 +37,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Post()
   async create(@Body() PayloadProductDto: PayloadProductDto): Promise<TResponse<ProductDto>> {
     const product = await this.productService.create(PayloadProductDto);
@@ -45,6 +47,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Post('/categories')
   async createCategory(@Body() createCategoryDto: CreateCategoryDto): Promise<TResponse<CategoryDto>> {
     const data = await this.productService.createCategory(createCategoryDto);
@@ -54,6 +57,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Get('ids')
   async getIdProducts(): Promise<TResponse<number[]>> {
     const ids = await this.productService.getIds();
@@ -63,6 +67,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Get(':id')
   async findOneByID(@Param('id') id: number): Promise<TResponse<ProductDto>> {
     const product = await this.productService.findOneByID(id);
@@ -72,6 +77,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Patch(':id')
   async update(@Param('id') id: number, @Body() PayloadProductDto: PayloadProductDto): Promise<TResponse<boolean>> {
     const isUpdated = await this.productService.update(id, PayloadProductDto);
@@ -81,6 +87,7 @@ export class ProductController {
     };
   }
 
+  @Roles('Admin', 'Cashier')
   @Delete(':id')
   async remove(@Param('id') id: number): Promise<TResponse<boolean>> {
     const isDeleted = await this.productService.remove(id);
