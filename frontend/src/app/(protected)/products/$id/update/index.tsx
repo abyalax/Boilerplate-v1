@@ -12,7 +12,7 @@ import useGetProductCategories from '~/app/(protected)/products/_hooks/use-get-c
 import { useUpdateProduct } from '~/app/(protected)/products/$id/_hooks/use-update-product';
 import { useCreateCategory } from '~/app/(protected)/products/create/_hooks/use-create-category';
 import useGetProduct, { queryProductByID } from '~/app/(protected)/products/_hooks/use-get-product-by-id';
-import { EProductStatus } from '~/api/product/type';
+import { EProductStatus } from '~/modules/product/product.schema';
 import { formatCurrency } from '~/utils/format';
 
 export const Route = createFileRoute('/(protected)/products/$id/update/')({

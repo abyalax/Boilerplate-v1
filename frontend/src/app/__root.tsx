@@ -3,10 +3,9 @@ import { Affix, Button, Transition } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
 import { FaArrowUp } from 'react-icons/fa';
 
-import SessionProvider from '~/components/provider/session';
-
-import type { ISession } from '~/stores/use-session';
 import type { QueryClient } from '@tanstack/react-query';
+import type { ISession } from '~/stores/use-session';
+import { Fragment } from 'react/jsx-runtime';
 
 interface RouterContext {
   session: ISession;
@@ -20,7 +19,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 function RootRouteComponent() {
   const [scroll, scrollTo] = useWindowScroll();
   return (
-    <SessionProvider>
+    <Fragment>
       <Outlet />
       <Affix position={{ bottom: 20, right: 20 }}>
         <Transition transition="slide-up" mounted={scroll.y > 0}>
@@ -31,6 +30,6 @@ function RootRouteComponent() {
           )}
         </Transition>
       </Affix>
-    </SessionProvider>
+    </Fragment>
   );
 }

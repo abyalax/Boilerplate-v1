@@ -1,5 +1,5 @@
 import z from 'zod';
-import type { MetaRequest } from '~/common/types/meta';
+import type { MetaRequest, MetaResponse } from '~/common/types/meta';
 
 export enum EProductStatus {
   AVAILABLE = 'AVAILABLE',
@@ -17,6 +17,11 @@ export interface IProduct {
   stock: number;
   created_at?: Date | string;
   updated_at?: Date | string;
+}
+
+export interface ProductPaginated {
+  data: IProduct[];
+  meta: MetaResponse;
 }
 
 export interface QueryProducts extends MetaRequest<IProduct> {

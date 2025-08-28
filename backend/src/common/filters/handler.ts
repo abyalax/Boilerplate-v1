@@ -2,12 +2,13 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from '@nestjs/jwt';
 import { QueryFailedError, EntityNotFoundError } from 'typeorm';
 import { EMessage } from '../types/response';
+import { ZodError } from 'zod';
 
 type ErrorConstructor<T extends Error = Error> = new (...args: unknown[]) => T;
 type ExceptionHandler<T = unknown> = (e: T) => {
   statusCode: number;
-  message: string;
-  error: string;
+  message: unknown;
+  error: unknown;
 };
 
 export const handlers = new Map<ErrorConstructor, ExceptionHandler>([
@@ -63,6 +64,17 @@ export const handlers = new Map<ErrorConstructor, ExceptionHandler>([
         statusCode: HttpStatus.UNPROCESSABLE_ENTITY,
         message: EMessage.ENTITY_NOT_FOUND,
         error: e.message,
+      };
+    },
+  ],
+  [
+    ZodError,
+    (e: ZodError) => {
+      console.log('ZodError: ', e.issues);
+      return {
+        statusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+        message: e.issues.map((i) => i.message),
+        error: e.errors,
       };
     },
   ],

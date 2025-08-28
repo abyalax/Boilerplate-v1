@@ -8,7 +8,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import useGetProduct from '~/app/(protected)/products/_hooks/use-get-product-by-id';
 import { formatCurrency } from '~/utils/format';
 import { FaPencilAlt } from 'react-icons/fa';
-import { EProductStatus } from '~/api/product/type';
+import { EProductStatus } from '~/modules/product/product.schema';
 
 export const Route = createFileRoute('/(protected)/products/$id/')({
   component: RouteComponent,

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import type { IUser } from '~/api/user/user';
+import type { IUser } from '~/modules/user/user';
 
 export type TStatusSession = 'authenticated' | 'authenticating' | 'unauthenticated' | 'loading';
 
@@ -21,7 +21,7 @@ export interface ISessionStores {
 export const useSessionStore = create<ISessionStores>()(
   devtools(
     persist(
-      immer(set => ({
+      immer((set) => ({
         session: {
           status: 'unauthenticated',
           access_token: undefined,
@@ -29,22 +29,22 @@ export const useSessionStore = create<ISessionStores>()(
           user: undefined,
         },
         setSession: (session: ISession) => {
-          set(s => {
+          set((s) => {
             s.session = session;
           });
         },
         setUser: (user: IUser) => {
-          set(s => {
+          set((s) => {
             s.session.user = user;
           });
         },
         setStatus: (status: TStatusSession) => {
-          set(s => {
+          set((s) => {
             s.session.status = status;
           });
         },
         setRemoved: () => {
-          set(s => {
+          set((s) => {
             s.session = {
               user: undefined,
               status: 'unauthenticated',
@@ -54,14 +54,14 @@ export const useSessionStore = create<ISessionStores>()(
       })),
       {
         name: 'SessionState',
-        partialize: state => ({
+        partialize: (state) => ({
           session: {
             status: state.session.status,
             user: state.session.user,
           },
         }),
-      }
+      },
     ),
-    { name: 'SessionStore' }
-  )
+    { name: 'SessionStore' },
+  ),
 );

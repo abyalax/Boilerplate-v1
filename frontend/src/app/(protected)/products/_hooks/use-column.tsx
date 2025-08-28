@@ -6,10 +6,10 @@ import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { useMemo } from 'react';
 
 import { formatCurrency } from '~/utils/format';
-import { EProductStatus } from '~/api/product/type';
+import { EProductStatus } from '~/modules/product/product.schema';
 import { colors } from '~/components/themes';
 
-import type { IProduct } from '~/api/product/type';
+import type { IProduct } from '~/modules/product/product.schema';
 import { useDeleteProduct } from './use-delete-products';
 
 const columnHelper = createColumnHelper<IProduct>();

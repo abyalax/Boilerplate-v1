@@ -1,7 +1,7 @@
 import { Expose, Type } from 'class-transformer';
-import { EProductStatus } from '../product.interface';
+import { EProductStatus } from '../product.schema';
 import { CategoryDto } from './category-product.dto';
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsNumberString, IsString } from 'class-validator';
 
 export class ProductDto {
   @Expose()
@@ -13,7 +13,7 @@ export class ProductDto {
   name: string;
 
   @Expose()
-  @IsNumber()
+  @IsNumberString()
   price: string;
 
   @Expose()

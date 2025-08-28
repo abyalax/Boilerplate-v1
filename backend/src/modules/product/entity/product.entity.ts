@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { EProductStatus } from '../product.interface';
+import { EProductStatus } from '../product.schema';
 import type { Category } from './category.entity';
 
 @Entity({ name: 'products' })
@@ -28,8 +28,8 @@ export class Product {
   category: Category;
 
   @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
-  created_at?: Date;
+  created_at?: string;
 
   @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
-  updated_at?: Date;
+  updated_at?: string;
 }

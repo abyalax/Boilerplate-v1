@@ -1,10 +1,10 @@
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
+import { NestFactory } from '@nestjs/core';
 
 import { GlobalExceptionFilter } from './common/filters/global';
-import { AppModule } from './app.module';
 import { CREDENTIALS } from './common/constants/credential';
+import { AppModule } from './app.module';
 
 import 'reflect-metadata';
 
@@ -20,11 +20,12 @@ async function bootstrap() {
       whitelist: true,
       transformOptions: {
         excludeExtraneousValues: true,
+        enableImplicitConversion: true,
       },
     }),
   );
   app.enableCors({
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   });
@@ -32,5 +33,5 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap()
-  .then(() => console.log('Server started'))
+  .then(() => console.log('Nest Aplication running on http://localhost:3000'))
   .catch((err) => console.log(err));

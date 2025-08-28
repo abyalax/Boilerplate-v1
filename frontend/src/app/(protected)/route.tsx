@@ -1,7 +1,7 @@
 import { Group, Menu, Text, useMantineColorScheme, Grid, SegmentedControl } from '@mantine/core';
 import { AppShell, Tabs, Burger, Button, Flex } from '@mantine/core';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
-import { IconCalendarStats, IconFileAnalytics, IconGauge, IconLock, IconNotes } from '@tabler/icons-react';
+import { IconCalendarStats, IconFileAnalytics, IconGauge, IconLock, IconNotes, type IconProps } from '@tabler/icons-react';
 import { IconAdjustments, IconPresentationAnalytics } from '@tabler/icons-react';
 import { AiFillSetting } from 'react-icons/ai';
 
@@ -15,14 +15,31 @@ import { LinksGroup } from './_components/link-group';
 import { UserButton } from './_components/user-button';
 import { getColors } from '~/components/themes';
 
+import type { FileRouteTypes } from '~/routeTree.gen';
 import styles from './layout.module.css';
 
 export const Route = createFileRoute('/(protected)')({
   component: RouteComponent,
 });
 
-const data = [
-  { label: 'Dashboard', icon: IconGauge },
+type DataSidebar = {
+  label: string;
+  links:
+    | {
+        label: string;
+        link: FileRouteTypes['to'];
+      }[]
+    | FileRouteTypes['to'];
+  icon: React.FC<IconProps>;
+  initiallyOpened?: boolean;
+};
+
+const data: DataSidebar[] = [
+  {
+    label: 'Dashboard',
+    icon: IconGauge,
+    links: '/',
+  },
   {
     label: 'Market news',
     icon: IconNotes,
@@ -43,9 +60,9 @@ const data = [
       { label: 'Releases schedule', link: '/' },
     ],
   },
-  { label: 'Analytics', icon: IconPresentationAnalytics },
-  { label: 'Contracts', icon: IconFileAnalytics },
-  { label: 'Settings', icon: IconAdjustments },
+  { label: 'Analytics', icon: IconPresentationAnalytics, links: '/' },
+  { label: 'Contracts', icon: IconFileAnalytics, links: '/' },
+  { label: 'Settings', icon: IconAdjustments, links: '/' },
   {
     label: 'Security',
     icon: IconLock,

@@ -4,8 +4,8 @@ import { Product } from '~/modules/product/entity/product.entity';
 export type RowProducts = Omit<Product, 'category'> & {
   category_id: number;
   category_name: string;
-  category_created_at: Date;
-  category_updated_at: Date;
+  category_created_at: string;
+  category_updated_at: string;
 };
 
 export function mapProductRows(rows: RowProducts[]): Product[] {

@@ -1,8 +1,8 @@
 import type { MetaRequest } from '~/common/types/meta';
 
 export enum EProductStatus {
-  AVAILABLE = 'AVAILABLE',
-  UNAVAILABLE = 'UNAVAILABLE',
+  AVAILABLE = 'Available',
+  UNAVAILABLE = 'Unavailable',
 }
 
 export enum ESortBy {
@@ -20,23 +20,23 @@ interface IFilter {
   stock?: number;
 }
 
-export interface IProduct {
+export interface Product {
   id: string;
   name: string;
   price: string;
   status: EProductStatus;
-  category: ICategory;
+  category: Category;
   stock: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-export interface ICategory {
+export interface Category {
   id: string;
   name: string;
-  products?: IProduct[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  products?: Product[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-export interface IQueryProducts extends MetaRequest<IProduct>, IFilter {}
+export interface IQueryProducts extends MetaRequest<Product>, IFilter {}

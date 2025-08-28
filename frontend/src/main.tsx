@@ -45,7 +45,7 @@ declare module '@tanstack/react-query' {
 
 const session = useSessionStore.getState().session;
 
-const router = createRouter({
+export const router = createRouter({
   routeTree,
   defaultPendingComponent: LoadingPage,
   defaultNotFoundComponent: NotFoundPage,

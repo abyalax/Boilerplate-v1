@@ -1,9 +1,9 @@
 import { HttpStatus } from '@nestjs/common';
 
-export type TResponse<T> = {
+export type TResponse<T = unknown> = {
   statusCode: HttpStatus;
-  message?: string;
-  error?: string;
+  message?: string | string[];
+  error?: unknown;
   data?: T;
 };
 
@@ -22,6 +22,7 @@ export enum EMessage {
 
   ENTITY_NOT_FOUND = 'Entity Not Found',
   ENTITY_CONFLICT = 'Entity Conflict',
+  ENTITY_PROPERTY_NOT_FOUND = 'Entity Property Was Not Found.',
 
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
 }

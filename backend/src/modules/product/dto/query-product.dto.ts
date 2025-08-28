@@ -1,6 +1,6 @@
 import { IsOptional, IsNumber, IsEnum } from 'class-validator';
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { EProductStatus } from '../product.interface';
+import { EProductStatus } from '../product.schema';
 import { MetaRequestDto } from '~/common/dto/meta-request.dto';
 
 @Exclude()

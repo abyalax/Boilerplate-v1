@@ -1,4 +1,4 @@
-import type { EngineSide } from '~/components/fragments/table/_hooks/use-table-state';
+import type { EngineSide } from '~/components/fragments/table';
 
 interface Pagination {
   page?: number;

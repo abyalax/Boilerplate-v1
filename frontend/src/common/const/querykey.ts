@@ -8,4 +8,4 @@ export const QUERY_KEY = {
   },
 } as const;
 
-export type QueryKey = ExtractString<typeof QUERY_KEY>;
+export type QueryKey<T = never> = ExtractString<typeof QUERY_KEY> | T;

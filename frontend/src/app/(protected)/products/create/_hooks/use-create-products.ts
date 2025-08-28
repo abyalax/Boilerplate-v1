@@ -4,11 +4,11 @@ import { notifications } from '@mantine/notifications';
 import type { UseMutationResult } from '@tanstack/react-query';
 
 import { MUTATION_KEY } from '~/common/const/mutationkey';
-import { createProduct } from '~/api/product/api';
+import { createProduct } from '~/modules/product/product.api';
 import { QUERY_KEY } from '~/common/const/querykey';
 
 import type { TAxiosResponse } from '~/common/types/response';
-import type { IProduct, TPayloadProduct } from '~/api/product/type';
+import type { IProduct, TPayloadProduct } from '~/modules/product/product.schema';
 
 export const useCreateProduct = (): UseMutationResult<TAxiosResponse<IProduct>, unknown, TPayloadProduct, unknown> => {
   return useMutation({

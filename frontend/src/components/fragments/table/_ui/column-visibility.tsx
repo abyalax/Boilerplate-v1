@@ -1,4 +1,4 @@
-import { Button, Checkbox, Menu, Popover } from '@mantine/core';
+import { Button, Checkbox, Menu, Popover, Tooltip } from '@mantine/core';
 import type { Table } from '@tanstack/react-table';
 import { FaEye } from 'react-icons/fa';
 import { convertCamelToTitleCase } from '~/utils/format';
@@ -27,9 +27,11 @@ export const ColumnVisibilitySelector = <T,>({ table, columnIds }: ColumnSelecto
   return (
     <Popover>
       <Popover.Target>
-        <Button variant="outline">
-          <FaEye size={22} />
-        </Button>
+        <Tooltip label="Select Columns">
+          <Button variant="outline">
+            <FaEye size={22} />
+          </Button>
+        </Tooltip>
       </Popover.Target>
       <Popover.Dropdown>
         <Menu>

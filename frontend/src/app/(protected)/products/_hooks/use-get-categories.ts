@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getProductCategories } from '~/api/product/api';
+import { getProductCategories } from '~/modules/product/product.api';
 import { QUERY_KEY } from '~/common/const/querykey';
 
 export const queryProductCategories = () => ({

@@ -1,4 +1,4 @@
-import { EProductStatus, type IProduct } from './type';
+import { EProductStatus, type IProduct } from './product.schema';
 const now = new Date();
 export const listProducts: IProduct[] = [
   {

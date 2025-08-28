@@ -1,10 +1,10 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
-import { SeederOptions } from 'typeorm-extension';
-import { Product } from '~/modules/product/entity/product.entity';
-import { User } from '~/modules/user/user.entity';
-import { Role } from '~/modules/auth/entity/role.entity';
 import { Permission } from '~/modules/auth/entity/permission.entity';
 import { Category } from '~/modules/product/entity/category.entity';
+import { Product } from '~/modules/product/entity/product.entity';
+import { Role } from '~/modules/auth/entity/role.entity';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
+import { User } from '~/modules/user/user.entity';
 import { configDotenv } from 'dotenv';
 
 configDotenv();

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getProductByID } from '~/api/product/api';
+import { getProductByID } from '~/modules/product/product.api';
 import { QUERY_KEY } from '~/common/const/querykey';
 
 export const queryProductByID = (query: { id: string }) => ({

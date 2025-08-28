@@ -1,5 +1,5 @@
 import { IsEnum, IsNumber, IsNumberString, IsString } from 'class-validator';
-import { EProductStatus } from '../product.interface';
+import { EProductStatus } from '../product.schema';
 import { Expose } from 'class-transformer';
 
 export class PayloadProductDto {

@@ -1,7 +1,7 @@
 import { Product } from '~/modules/product/entity/product.entity';
-import { EProductStatus } from '~/modules/product/product.interface';
+import { EProductStatus } from '~/modules/product/product.schema';
 
-const now = new Date();
+const now = new Date().toISOString();
 export const mockCategories = [
   {
     id: 1,

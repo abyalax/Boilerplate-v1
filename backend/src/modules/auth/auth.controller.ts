@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 import { TResponse } from '~/common/types/response';
 import { JwtGuard } from '~/common/guards/jwt.guard';
 import { RolesGuard } from '~/common/guards/roles.guard';
+import { plainToInstance } from 'class-transformer';
 
 @Controller('auth')
 export class AuthController {
@@ -39,7 +40,7 @@ export class AuthController {
     });
     const res: TResponse<UserDto> = {
       statusCode: HttpStatus.ACCEPTED,
-      data: data.user,
+      data: plainToInstance(UserDto, data.user, { excludeExtraneousValues: true }),
     };
     return res;
   }

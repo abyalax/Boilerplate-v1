@@ -1,3 +1,15 @@
+<p align="center">
+  <a href="https://react.dev/" target="blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="100" alt="React Logo" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://vitejs.dev/" target="blank">
+    <img src="https://vitejs.dev/logo.svg" width="100" alt="Vite Logo" />
+  </a>
+</p>
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
