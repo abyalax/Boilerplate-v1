@@ -1,7 +1,8 @@
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
-import { ClassValidatorFail, ZodValidationFail } from './exception';
-import { ZodError, ZodSchema } from 'zod';
+import { ClassValidatorFail, ZodValidationFail } from '../filters/exception';
+import { ZodError, ZodSchema, ZodTypeAny, ZodIntersection } from 'zod';
+import z from 'zod';
 
 export async function validateDto<T extends object>(dtoClass: new () => T, data: T): Promise<T> {
   if (data === undefined) throw new ClassValidatorFail([{ constraints: { messages: 'Data is Undefined' }, property: 'data' }]);
@@ -20,4 +21,8 @@ export function validateSchema<T>(schema: ZodSchema<T>, data: T): T {
   } catch (error) {
     throw new ZodValidationFail(error as ZodError);
   }
+}
+
+export function multiIntersection<Schemas extends [ZodTypeAny, ZodTypeAny, ...ZodTypeAny[]]>(...schemas: Schemas) {
+  return schemas.reduce((acc, schema) => z.intersection(acc, schema)) as ZodIntersection<Schemas[number], Schemas[number]>;
 }

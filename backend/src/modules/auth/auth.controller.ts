@@ -73,4 +73,21 @@ export class AuthController {
       data: permission,
     };
   }
+
+  @HttpCode(HttpStatus.ACCEPTED)
+  @Get('logout')
+  signOut(@Res({ passthrough: true }) response: ResponseExpress): TResponse {
+    response.cookie('refresh_token', '', {
+      httpOnly: true,
+      signed: true,
+    });
+    response.cookie('access_token', '', {
+      httpOnly: true,
+      signed: true,
+    });
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Successfully logout',
+    };
+  }
 }

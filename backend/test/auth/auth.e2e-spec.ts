@@ -9,23 +9,27 @@ import { App } from 'supertest/types';
 import { extractHttpOnlyCookie, extractSignedCookieToken } from '../utils';
 import { RoleDto } from '~/modules/auth/dto/role/get-role.dto';
 import { SignUpDto } from '~/modules/auth/dto/sign-up.dto';
-import { CREDENTIALS } from '~/common/constants/credential';
 import { setupApplication } from '~/test/setup_e2e';
-import { validateDto } from '../common/helper';
+import { validateDto } from '../../src/common/helper/validation';
 import { USER } from '../common/constant';
 import { UserDto } from '~/modules/user/dto/user.dto';
+import { JwtConfig } from '~/config/jwt.config';
+import { ConfigService } from '@nestjs/config';
 
 describe('Module Authentication', () => {
   let app: INestApplication<App>;
   let moduleFixture: TestingModule;
   let jwtService: JwtService;
+  let jwt: JwtConfig;
 
   beforeAll(async () => {
     [app, moduleFixture] = await setupApplication();
+    const configService = app.get(ConfigService);
+    jwt = configService.get<JwtConfig>('jwt')!;
     jwtService = new JwtService({
-      secret: CREDENTIALS.JWT_SECRET,
-      publicKey: CREDENTIALS.JWT_PUBLIC_KEY,
-      privateKey: CREDENTIALS.JWT_PRIVATE_KEY,
+      secret: jwt.secret,
+      publicKey: jwt.public_key,
+      privateKey: jwt.private_key,
     });
   });
 
@@ -48,8 +52,8 @@ describe('Module Authentication', () => {
     const access_token_raw = extractSignedCookieToken(access_token);
     const refresh_token_raw = extractSignedCookieToken(refresh_token);
 
-    expect(() => jwtService.verify(access_token_raw, { secret: CREDENTIALS.JWT_SECRET }) as unknown).not.toThrow();
-    expect(() => jwtService.verify(refresh_token_raw, { secret: CREDENTIALS.JWT_REFRESH_SECRET }) as unknown).not.toThrow();
+    expect(() => jwtService.verify(access_token_raw, { secret: jwt.secret }) as unknown).not.toThrow();
+    expect(() => jwtService.verify(refresh_token_raw, { secret: jwt.refresh_secret }) as unknown).not.toThrow();
 
     const payload = jwtService.verify(access_token_raw);
     expect(payload).toHaveProperty('sub');

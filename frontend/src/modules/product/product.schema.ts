@@ -2,8 +2,8 @@ import z from 'zod';
 import type { MetaRequest, MetaResponse } from '~/common/types/meta';
 
 export enum EProductStatus {
-  AVAILABLE = 'AVAILABLE',
-  UNAVAILABLE = 'UNAVAILABLE',
+  AVAILABLE = 'Available',
+  UNAVAILABLE = 'Unavailable',
 }
 
 export type TPayloadProduct = Omit<IProduct, 'id' | 'category'> & { category: string; id?: string };

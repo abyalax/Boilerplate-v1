@@ -1,14 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import { getProductByID } from '~/modules/product/product.api';
-import { QUERY_KEY } from '~/common/const/querykey';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 
-export const queryProductByID = (query: { id: string }) => ({
+import type { TAxiosResponse, TResponse } from '~/common/types/response';
+import { QUERY_KEY, type QueryKey } from '~/common/const/querykey';
+import type { IProduct } from '~/modules/product/product.schema';
+import { getProductByID } from '~/modules/product/product.api';
+
+type Result = UseQueryOptions<TAxiosResponse<IProduct>, TResponse, IProduct | undefined, QueryKey<{ id: string }>[]>;
+
+export const queryProductByID = (query: { id: string }): Result => ({
   queryKey: [QUERY_KEY.PRODUCT.GET_ALL, query],
   queryFn: () => getProductByID(query),
+  select: (s) => s.data.data,
 });
 
-const useGetProduct = (query: { id: string }) => {
+export const useGetProduct = (query: { id: string }) => {
   return useQuery(queryProductByID(query));
 };
-
-export default useGetProduct;

@@ -11,7 +11,7 @@ import z from 'zod';
 import useGetProductCategories from '~/app/(protected)/products/_hooks/use-get-categories';
 import { useUpdateProduct } from '~/app/(protected)/products/$id/_hooks/use-update-product';
 import { useCreateCategory } from '~/app/(protected)/products/create/_hooks/use-create-category';
-import useGetProduct, { queryProductByID } from '~/app/(protected)/products/_hooks/use-get-product-by-id';
+import { queryProductByID, useGetProduct } from '~/app/(protected)/products/_hooks/use-get-product-by-id';
 import { EProductStatus } from '~/modules/product/product.schema';
 import { formatCurrency } from '~/utils/format';
 
@@ -25,12 +25,12 @@ export const Route = createFileRoute('/(protected)/products/$id/update/')({
 function RouteComponent() {
   const navigate = Route.useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
+  const { id } = Route.useParams();
 
   const { data: dataCategories } = useGetProductCategories();
-  const { mutate: mutateUpdateProduct } = useUpdateProduct();
+  const { mutate: mutateUpdateProduct } = useUpdateProduct(id);
   const { mutate: mutateCreateCategory } = useCreateCategory();
-  const { data: dataProduct } = useGetProduct(Route.useParams());
-  const product = dataProduct?.data.data;
+  const { data: product } = useGetProduct({ id });
   const categories = dataCategories?.data.data?.map((e) => {
     return {
       label: e.name,
@@ -169,7 +169,7 @@ function RouteComponent() {
 
               <Table.Tr>
                 <Table.Th w={80}>Status</Table.Th>
-                <Table.Td w={'300px'}>{formProduct.values.status === EProductStatus.AVAILABLE ? 'Available' : 'UnAvailable'}</Table.Td>
+                <Table.Td w={'300px'}>{formProduct.values.status}</Table.Td>
               </Table.Tr>
             </Table.Tbody>
           </Table>

@@ -20,7 +20,6 @@ export class ProductController {
   @HttpCode(HttpStatus.OK)
   @Get()
   async get(@Query() query: QueryProductDto): Promise<TResponse<{ data: ProductDto[]; meta: MetaResponse }>> {
-    console.log(query);
     const products = await this.productService.find(query);
     return {
       statusCode: HttpStatus.OK,

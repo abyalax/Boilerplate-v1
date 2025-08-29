@@ -1,22 +1,24 @@
+import { IconCalendarStats, IconFileAnalytics, IconGauge, IconLock, IconNotes, type IconProps } from '@tabler/icons-react';
 import { Group, Menu, Text, useMantineColorScheme, Grid, SegmentedControl } from '@mantine/core';
+import { IconAdjustments, IconPresentationAnalytics } from '@tabler/icons-react';
+import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
 import { AppShell, Tabs, Burger, Button, Flex } from '@mantine/core';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
-import { IconCalendarStats, IconFileAnalytics, IconGauge, IconLock, IconNotes, type IconProps } from '@tabler/icons-react';
-import { IconAdjustments, IconPresentationAnalytics } from '@tabler/icons-react';
-import { AiFillSetting } from 'react-icons/ai';
 
-import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
 import { FaBox, FaFacebookMessenger, FaGalacticRepublic, FaSun, FaSync, FaUser } from 'react-icons/fa';
 import { FaHome, FaMoon, FaPhotoVideo, FaMoneyBill, FaSignOutAlt } from 'react-icons/fa';
+import { AiFillSetting } from 'react-icons/ai';
 import { useState } from 'react';
 
 import { PermissionGate } from '~/components/middlewares/permission-gate';
-import { LinksGroup } from './_components/link-group';
 import { UserButton } from './_components/user-button';
+import { LinksGroup } from './_components/link-group';
 import { getColors } from '~/components/themes';
 
+import { useSessionStore } from '~/stores/use-session';
 import type { FileRouteTypes } from '~/routeTree.gen';
 import styles from './layout.module.css';
+import { api } from '~/lib/axios/api';
 
 export const Route = createFileRoute('/(protected)')({
   component: RouteComponent,
@@ -78,10 +80,18 @@ function RouteComponent() {
   const [section, setSection] = useState<string>('account');
   const [activeTab, setActiveTab] = useState<string | null>('home');
   const [navbarOpened, { toggle }] = useDisclosure();
+  const setStatus = useSessionStore((s) => s.setStatus);
 
   const { setColorScheme } = useMantineColorScheme();
   const isDesktop = useMediaQuery('(min-width: 56.25em)', true);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    api.get('/auth/logout').then(() => {
+      setStatus('unauthenticated');
+      navigate({ to: '/auth/login' });
+    });
+  };
 
   const links = data.map((item) => <LinksGroup {...item} key={item.label} />);
 
@@ -202,7 +212,7 @@ function RouteComponent() {
 
                   <Menu.Label>User</Menu.Label>
                   <Menu.Item leftSection={<FaUser size={14} />}>Profile</Menu.Item>
-                  <Menu.Item color="red" leftSection={<FaSignOutAlt size={14} />}>
+                  <Menu.Item color="red" onClick={handleLogout} leftSection={<FaSignOutAlt size={14} />}>
                     Sign Out
                   </Menu.Item>
                 </Menu.Dropdown>

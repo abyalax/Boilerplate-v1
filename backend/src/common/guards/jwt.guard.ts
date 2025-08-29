@@ -6,24 +6,27 @@ import { UserService } from '../../modules/user/user.service';
 import { plainToInstance } from 'class-transformer';
 import { UserDto } from '../../modules/user/dto/user.dto';
 import { Request } from 'express';
-import { CREDENTIALS } from '../constants/credential';
 import { EMessage } from '../types/response';
+import { ConfigService } from '@nestjs/config';
+import { JwtConfig } from '~/config/jwt.config';
 
 @Injectable()
 export class JwtGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private userService: UserService,
+    private readonly configService: ConfigService,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest();
+    const jwt = this.configService.get<JwtConfig>('jwt')!;
 
     const token: string = request.signedCookies.access_token;
     if (!token) throw new UnauthorizedException(EMessage.TOKEN_NOT_FOUND);
 
     try {
       const verifyToken = await this.jwtService.verifyAsync(token, {
-        secret: CREDENTIALS.JWT_SECRET,
+        secret: jwt.secret,
       });
       if (verifyToken) {
         const user = await this.userService.findOneBy({ id: verifyToken.sub });

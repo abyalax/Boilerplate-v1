@@ -9,7 +9,7 @@ import { EProductStatus } from '~/modules/product/product.schema';
 import { ProductDto } from '~/modules/product/dto/product.dto';
 import { extractHttpOnlyCookie } from '~/test/utils';
 import { setupApplication } from '~/test/setup_e2e';
-import { validateDto } from '~/test/common/helper';
+import { validateDto } from '~/common/helper/validation';
 import { USER } from '~/test/common/constant';
 
 describe('Product Module', () => {

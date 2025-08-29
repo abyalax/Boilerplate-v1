@@ -1,11 +1,11 @@
 import { useMutation, type UseMutationResult } from '@tanstack/react-query';
 import { notifications } from '@mantine/notifications';
 
-import { MUTATION_KEY } from '~/common/const/mutationkey';
-import type { TAxiosResponse } from '~/common/types/response';
-import { createCategory } from '~/modules/product/product.api';
-import { QUERY_KEY } from '~/common/const/querykey';
 import type { ICategory } from '~/modules/product/product.schema';
+import { createCategory } from '~/modules/product/product.api';
+import type { TAxiosResponse } from '~/common/types/response';
+import { MUTATION_KEY } from '~/common/const/mutationkey';
+import { QUERY_KEY } from '~/common/const/querykey';
 
 export const useCreateCategory = (): UseMutationResult<TAxiosResponse<{ category: ICategory }>, unknown, { name: string }, unknown> => {
   return useMutation({

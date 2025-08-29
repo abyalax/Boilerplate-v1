@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import useGetProduct from '~/app/(protected)/products/_hooks/use-get-product-by-id';
+import { useGetProduct } from '~/app/(protected)/products/_hooks/use-get-product-by-id';
 import { formatCurrency } from '~/utils/format';
 import { FaPencilAlt } from 'react-icons/fa';
 import { EProductStatus } from '~/modules/product/product.schema';
@@ -16,8 +16,7 @@ export const Route = createFileRoute('/(protected)/products/$id/')({
 
 function RouteComponent() {
   const params = Route.useParams();
-  const { data } = useGetProduct({ id: params.id });
-  const product = data?.data.data;
+  const { data: product } = useGetProduct({ id: params.id });
   dayjs.extend(relativeTime);
   return (
     <Suspense fallback={<Loader />}>
