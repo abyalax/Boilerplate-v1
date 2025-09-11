@@ -1,6 +1,6 @@
 # Fitur Utama Boilerplate v1
 
-## Boilerplate ini mencakup **frontend modern** berbasis React dengan **TanStack Router** (highly type-safe) dan **backend modular** berbasis NestJS.
+## Boilerplate React Nest Typescript
 
 ## Frontend
 
@@ -19,9 +19,9 @@
 ### Framework & Library
 
 - **React Vite + TanStack Router** → type-safety penuh untuk routing, loader, dan action dengan build tool modern.
-- **TanStack Query** → data fetching, caching, dan invalidation terintegrasi.
+- **TanStack Query** → data fetching, caching, dan revalidate.
 - **State Management** → Zustand.
-- **UI Library Ant Design** → komponen siap pakai dengan konsistensi desain.
+- **UI Library Mantine** → komponen siap pakai dengan konsistensi desain.
 - **TypeScript by default** → semua komponen dan hooks strongly typed.
 
 ### Fitur Utama
